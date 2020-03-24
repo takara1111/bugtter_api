@@ -42,10 +42,10 @@ class UsersController < ApplicationController
 
   def sign_in
     # find_byはID以外の条件から検索できるメソッド
-    user = User.find_by(email: params[:email], password_digest: params[:password])
+    user = User.find_by(email: params[:email])
 
     if user && user.authenticate(params[:password])
-      render json: @user
+      render json: user, only:[:name, :email, :token]
     else
       render json: { errors: ['ログインに失敗しました'] }, status: 401
     end
