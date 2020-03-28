@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     user = User.find_by(email: params[:email])
 
     if user && user.authenticate(params[:password])
-      render json: user, only:[:name, :email, :token]
+      render json: user, only:[:id, :name, :email, :token]
     else
       render json: { errors: ['ログインに失敗しました'] }, status: 401
     end
